@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Book Quiz</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'quote_app/styles.css' %}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> <!-- Include sweetalert library -->
+</head>
+
+<body>
+    <h1 class="header">Holy Book Quiz Game</h1>
+    <div class="center-container">
+        <h2 class="quote">{{ quote }}</h2>
+        {% if messages %}
+        <script>
+            {% for message in messages %}
+            swal("Notification", "{{ message }}", "{{ message.tags }}");
+            {% endfor %}
+        </script>
+        {% endif %}
+        {% if keys %}
+        
+        <form method="post" class="quiz-form">
+            {% csrf_token %}
+            {% for key in keys %}
+            <input type="submit" value="{{ key }}" name="reply" class="select-button">
+            {% endfor %}
+        </form>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
